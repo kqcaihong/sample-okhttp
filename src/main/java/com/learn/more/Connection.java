@@ -1,4 +1,4 @@
 package com.learn.more;
 
-public class Connection {
+public interface Connection {
 }

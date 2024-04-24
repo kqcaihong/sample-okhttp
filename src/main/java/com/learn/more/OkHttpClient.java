@@ -14,6 +14,7 @@ public class OkHttpClient {
   private final Proxy proxy;
   private final ProxySelector proxySelector;
   private final ConnectionPool connectionPool;
+  private final EventListener.Factory eventListenerFactory;
   private final int connectTimeout;
   private final int readTimeout;
   private final int writeTimeout;
@@ -28,6 +29,7 @@ public class OkHttpClient {
     this.proxy = builder.proxy;
     this.proxySelector = builder.proxySelector;
     this.connectionPool = builder.connectionPool;
+    this.eventListenerFactory = builder.eventListenerFactory;
     this.connectTimeout = builder.connectTimeout;
     this.readTimeout = builder.readTimeout;
     this.writeTimeout = builder.writeTimeout;
@@ -40,14 +42,17 @@ public class OkHttpClient {
     private Proxy proxy;
     private ProxySelector proxySelector;
     private final ConnectionPool connectionPool;
+    private EventListener.Factory eventListenerFactory;
     private final int connectTimeout;
     private final int readTimeout;
     private final int writeTimeout;
 
+    // 用默认值
     public Builder() {
       this.dispatcher = new Dispatcher();
       this.interceptors = new ArrayList<>();
       this.connectionPool = new ConnectionPool();
+      this.eventListenerFactory = EventListener.factory(EventListener.NONE);
       this.connectTimeout = 10000;
       this.readTimeout = 10000;
       this.writeTimeout = 10000;

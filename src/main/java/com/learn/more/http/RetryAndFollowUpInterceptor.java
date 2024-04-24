@@ -1,19 +1,23 @@
 package com.learn.more.http;
 
 import com.learn.more.Interceptor;
-import com.learn.more.Request;
+import com.learn.more.OkHttpClient;
 import com.learn.more.Response;
 
 public class RetryAndFollowUpInterceptor implements Interceptor {
+  private final OkHttpClient client;
+
+  public RetryAndFollowUpInterceptor(OkHttpClient client) {
+    this.client = client;
+  }
 
   @Override
   public Response intercept(Chain chain) throws Exception {
-    Request request = chain.request();
     // pre
-    System.out.println(this.getClass().getName()+" pre");
-    Response response = chain.proceed(request);
+    System.out.println(this.getClass().getSimpleName() + " pre");
+    Response response = chain.proceed(chain.request());
     // post
-    System.out.println(this.getClass().getName()+" post");
+    System.out.println(this.getClass().getSimpleName() + " post");
     return response;
   }
 }

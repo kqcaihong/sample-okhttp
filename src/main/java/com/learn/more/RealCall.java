@@ -99,8 +99,8 @@ public class RealCall implements Call {
       this.callback = callback;
     }
 
-    public void counter() {
-      callsPerHostCounter.incrementAndGet();
+    public AtomicInteger counter() {
+      return callsPerHostCounter;
     }
 
 
@@ -134,9 +134,8 @@ public class RealCall implements Call {
           callback.onFailure(RealCall.this, e);
         }
       } finally {
-
+        client.getDispatcher().finished(this);
       }
-
     }
   }
 }

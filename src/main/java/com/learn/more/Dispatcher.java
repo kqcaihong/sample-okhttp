@@ -49,8 +49,18 @@ public class Dispatcher {
   }
 
   public void finished(RealCall call) {
+    finished(runningSyncCalls, call);
+  }
+
+
+  public void finished(AsyncCall call) {
+    call.counter().decrementAndGet();
+    finished(runningAsyncCalls, call);
+  }
+
+  private <T> void finished(Deque<T> deque, T call) {
     synchronized (this) {
-      if (!runningSyncCalls.remove(call)) {
+      if (!deque.remove(call)) {
         throw new AssertionError("Call wasn't in-flight!");
       }
     }
@@ -105,7 +115,7 @@ public class Dispatcher {
         if (!call.belowTheLimit(maxRequestsPerHost)) {
           continue;
         }
-        call.counter();
+        call.counter().incrementAndGet();
         iterator.remove();
         executableCalls.add(call);
         runningAsyncCalls.add(call);

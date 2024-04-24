@@ -57,8 +57,8 @@ public class RealCall implements Call {
     } catch (Exception e) {
       throw new RuntimeException(e);
     } finally {
-      // todo 归还连接、从队列移除Call;
-      client.getDispatcher().finished(this);
+      // todo 归还连接等;
+
     }
   }
 

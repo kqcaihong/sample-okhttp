@@ -17,13 +17,16 @@ public class RealInterceptorChain implements Interceptor.Chain {
     this.interceptors = interceptors;
     this.request = request;
     this.call = call;
+    if (index < 0) {
+      throw new IllegalArgumentException("index is wrong.");
+    }
     this.index = index;
   }
 
   @Override
   public Response proceed(Request request) throws Exception {
-    if (index < 0 || index > interceptors.size()) {
-      throw new IllegalArgumentException("index is wrong.");
+    if (index > interceptors.size()) {
+      throw new IllegalArgumentException("The last interceptor should not call proceed()");
     }
     RealInterceptorChain chain = new RealInterceptorChain(interceptors, request, call, index + 1);
     Interceptor current = interceptors.get(index);

@@ -17,5 +17,4 @@ public class MainTest {
     RealInterceptorChain chain = new RealInterceptorChain(interceptors, new Request(), new RealCall(), 0);
     Response response = chain.proceed(chain.request());
   }
-
 }

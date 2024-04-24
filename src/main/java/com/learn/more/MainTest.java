@@ -1,20 +1,28 @@
 package com.learn.more;
 
-import com.learn.more.connection.ConnectionInterceptor;
-import com.learn.more.http.CallServerInterceptor;
-import com.learn.more.http.RealInterceptorChain;
-import com.learn.more.http.RetryAndFollowUpInterceptor;
-import java.util.ArrayList;
-import java.util.List;
+import com.learn.more.OkHttpClient.Builder;
+import com.learn.more.http.Headers;
+import com.learn.more.http.HttpUrl;
+import com.learn.more.http.HttpUrl.SchemeEnum;
+import com.learn.more.http.RequestBody;
 
 public class MainTest {
 
   public static void main(String[] args) throws Exception {
-    List<Interceptor> interceptors = new ArrayList<>();
-    interceptors.add(new RetryAndFollowUpInterceptor());
-    interceptors.add(new ConnectionInterceptor());
-    interceptors.add(new CallServerInterceptor());
-    RealInterceptorChain chain = new RealInterceptorChain(interceptors, new Request(), new RealCall(), 0);
-    Response response = chain.proceed(chain.request());
+    OkHttpClient client = new Builder().build();
+    Request request = new Request(new HttpUrl(SchemeEnum.http.name(),"localhost",80,"/find"),"POST",new Headers(),new RequestBody());
+    Response response = client.newCall(request).execute();
+    client.newCall(request).asyncExecute(new Callback() {
+      @Override
+      public void onFailure(Call call, Exception e) {
+
+      }
+
+      @Override
+      public void onSuccess(Call call, Response response) {
+
+      }
+    });
+
   }
 }

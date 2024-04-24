@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class OkHttpClient {
+public class OkHttpClient implements Call.Factory{
   private final Dispatcher dispatcher;
   private final List<Interceptor> interceptors;
   private final Proxy proxy;
@@ -73,5 +73,10 @@ public class OkHttpClient {
     public OkHttpClient build() {
       return new OkHttpClient(this);
     }
+  }
+
+  @Override
+  public Call newCall(Request request) {
+    return new RealCall(this,request);
   }
 }

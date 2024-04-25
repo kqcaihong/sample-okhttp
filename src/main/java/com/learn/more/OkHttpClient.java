@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class OkHttpClient implements Call.Factory{
+public class OkHttpClient implements Call.Factory {
   private final Dispatcher dispatcher;
   private final List<Interceptor> interceptors;
   private final Proxy proxy;
   private final ProxySelector proxySelector;
   private final ConnectionPool connectionPool;
   private final EventListener.Factory eventListenerFactory;
+  private final Dns dns = Dns.SYSTEM;
   private final int connectTimeout;
   private final int readTimeout;
   private final int writeTimeout;
@@ -77,6 +78,6 @@ public class OkHttpClient implements Call.Factory{
 
   @Override
   public Call newCall(Request request) {
-    return new RealCall(this,request);
+    return new RealCall(this, request);
   }
 }

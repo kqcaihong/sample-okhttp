@@ -1,6 +1,7 @@
 package com.learn.more;
 
 import com.learn.more.connection.RealConnectionPool;
+
 import java.util.concurrent.TimeUnit;
 
 // 装饰类
@@ -28,5 +29,9 @@ public class ConnectionPool {
   // 清理空闲连接，不受空闲数、空闲时间限制
   public void evictAll() {
     delegate.evictAll();
+  }
+
+  public RealConnectionPool realConnectionPool() {
+    return delegate;
   }
 }

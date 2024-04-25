@@ -10,6 +10,12 @@ public class Address {
   private Proxy proxy;
   //SSL
 
+
+  public Address(HttpUrl url, Proxy proxy) {
+    this.url = url;
+    this.proxy = proxy;
+  }
+
   public HttpUrl url() {
     return url;
   }

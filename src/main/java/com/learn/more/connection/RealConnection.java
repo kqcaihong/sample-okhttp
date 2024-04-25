@@ -75,4 +75,15 @@ public class RealConnection implements Connection {
     socket.setSoTimeout(readTimeout);
     return socket;
   }
+
+  @Override
+  public String toString() {
+    return "RealConnection{" +
+        "noCarryTransmitter=" + noCarryTransmitter +
+        ", transmitters=" + transmitters +
+        ", allocationLimit=" + allocationLimit +
+        ", socket=" + socket +
+        ", address=" + address +
+        '}';
+  }
 }

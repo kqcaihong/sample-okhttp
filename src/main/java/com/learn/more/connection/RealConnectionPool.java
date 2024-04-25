@@ -2,6 +2,7 @@ package com.learn.more.connection;
 
 import com.learn.more.Address;
 import com.learn.more.ThreadUtil;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayDeque;
@@ -128,6 +129,7 @@ public class RealConnectionPool {
     try {
       RealConnection connection = new RealConnection(connectTimeout, readTimeout, writeTimeout, address);
       connection.addTransmitter(transmitter);
+      transmitter.connection = connection;
       put(connection);
     } catch (IOException e) {
     }

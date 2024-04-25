@@ -5,6 +5,7 @@ import com.learn.more.connection.Transmitter;
 import com.learn.more.http.CallServerInterceptor;
 import com.learn.more.http.RealInterceptorChain;
 import com.learn.more.http.RetryAndFollowUpInterceptor;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -51,7 +52,7 @@ public class RealCall implements Call {
     interceptors.add(new RetryAndFollowUpInterceptor(client));
     interceptors.add(new ConnectInterceptor(client));
     interceptors.add(new CallServerInterceptor(client));
-    RealInterceptorChain chain = new RealInterceptorChain(interceptors, request, this, 0);
+    RealInterceptorChain chain = new RealInterceptorChain(interceptors, request, this, transmitter, 0);
     try {
       return chain.proceed(request);
     } catch (Exception e) {
@@ -87,6 +88,11 @@ public class RealCall implements Call {
   @Override
   public Call clone() {
     return new RealCall(client, request);
+  }
+
+
+  public Address address() {
+    return new Address(request.getUrl(), client.getProxy());
   }
 
   public class AsyncCall implements Runnable {

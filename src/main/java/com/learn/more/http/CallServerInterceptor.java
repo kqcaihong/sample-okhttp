@@ -4,7 +4,7 @@ import com.learn.more.Interceptor;
 import com.learn.more.OkHttpClient;
 import com.learn.more.Response;
 
-// 最后一个Interceptor
+// 最后一个Interceptor，不调用Chain.proceed
 public class CallServerInterceptor implements Interceptor {
   private final OkHttpClient client;
 

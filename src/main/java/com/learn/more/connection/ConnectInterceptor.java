@@ -11,8 +11,10 @@ public class ConnectInterceptor implements Interceptor {
     this.client = client;
   }
 
+  // 如何将Connection继续传递
   @Override
   public Response intercept(Chain chain) throws Exception {
+
     // pre
     System.out.println(this.getClass().getSimpleName() + " pre");
     Response response = chain.proceed(chain.request());

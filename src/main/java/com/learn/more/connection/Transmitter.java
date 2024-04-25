@@ -20,4 +20,6 @@ public class Transmitter {
     listener.callStart(call);
   }
 
+  public void cancel() {
+  }
 }

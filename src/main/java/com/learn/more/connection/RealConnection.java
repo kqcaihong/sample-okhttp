@@ -34,6 +34,10 @@ public class RealConnection implements Connection {
     System.out.println("创建连接成功");
   }
 
+  public Socket socket() {
+    return socket;
+  }
+
   public boolean idle() {
     return transmitters.isEmpty();
   }

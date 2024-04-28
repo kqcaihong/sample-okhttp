@@ -43,8 +43,17 @@ public class RealInterceptorChain implements Interceptor.Chain {
     return interceptors;
   }
 
+
   @Override
   public Call call() {
     return call;
+  }
+
+  public RealCall getCall() {
+    return call;
+  }
+
+  public Transmitter getTransmitter() {
+    return transmitter;
   }
 }

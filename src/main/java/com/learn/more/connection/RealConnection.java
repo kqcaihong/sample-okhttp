@@ -4,8 +4,6 @@ import com.learn.more.Address;
 import com.learn.more.Connection;
 import com.learn.more.http.HttpUrl;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -33,6 +31,7 @@ public class RealConnection implements Connection {
   public RealConnection(int connectTimeout, int readTimeout, int writeTimeout, Address address) throws IOException {
     this.address = address;
     this.socket = connect(connectTimeout, readTimeout, writeTimeout);
+    System.out.println("创建连接成功");
   }
 
   public boolean idle() {
@@ -70,11 +69,10 @@ public class RealConnection implements Connection {
     } else {
       socket = new Socket(url.getHost(), url.getPort());
     }
-    InetAddress inetAddress = InetAddress.getByName(url.getHost());
-    socket.connect(new InetSocketAddress(inetAddress, url.getPort()), connectTimeout);
     socket.setSoTimeout(readTimeout);
     return socket;
   }
+
 
   @Override
   public String toString() {

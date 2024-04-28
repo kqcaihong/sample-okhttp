@@ -132,6 +132,7 @@ public class RealConnectionPool {
       transmitter.connection = connection;
       put(connection);
     } catch (IOException e) {
+      System.out.println(e);
     }
     return selected;
   }

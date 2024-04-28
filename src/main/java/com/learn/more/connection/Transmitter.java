@@ -17,6 +17,10 @@ public class Transmitter {
     this.listener = client.getEventListenerFactory().create(call);
   }
 
+  public RealConnection connection() {
+    return connection;
+  }
+
   public void callStart() {
     listener.callStart(call);
   }

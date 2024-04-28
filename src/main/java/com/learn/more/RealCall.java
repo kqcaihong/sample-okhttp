@@ -30,6 +30,11 @@ public class RealCall implements Call {
   }
 
   @Override
+  public Transmitter transmitter() {
+    return transmitter;
+  }
+
+  @Override
   public Response execute() throws Exception {
     synchronized (this) {
       if (executed) {

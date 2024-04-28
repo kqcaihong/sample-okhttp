@@ -31,6 +31,6 @@ public class HttpUrl {
   }
 
   public enum SchemeEnum {
-    https, http
+    HTTPS, HTTP
   }
 }

@@ -10,7 +10,7 @@ public class MainTest {
 
   public static void main(String[] args) throws Exception {
     OkHttpClient client = new Builder().build();
-    Request request = new Request(new HttpUrl(SchemeEnum.http.name(), "localhost", 80, "/find"), "POST", new Headers(), new RequestBody());
+    Request request = new Request(new HttpUrl(SchemeEnum.HTTP.name(), "localhost", 8010, "/queryAll"), "POST", new Headers(), new RequestBody());
     //    Response response = client.newCall(request).execute();
     client.newCall(request).asyncExecute(new Callback() {
       @Override
@@ -23,6 +23,5 @@ public class MainTest {
         System.out.println("success");
       }
     });
-
   }
 }

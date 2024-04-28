@@ -6,10 +6,10 @@ import com.learn.more.RealCall;
 import com.learn.more.Request;
 import com.learn.more.Response;
 import com.learn.more.connection.Transmitter;
-
 import java.util.List;
 
 public class RealInterceptorChain implements Interceptor.Chain {
+
   private final List<Interceptor> interceptors;
   private final Request request;
   private final RealCall call;
@@ -43,20 +43,8 @@ public class RealInterceptorChain implements Interceptor.Chain {
     return interceptors;
   }
 
-  public Request getRequest() {
-    return request;
-  }
-
-  public RealCall getCall() {
-    return call;
-  }
-
-  public Transmitter getTransmitter() {
-    return transmitter;
-  }
-
   @Override
   public Call call() {
-    return null;
+    return call;
   }
 }

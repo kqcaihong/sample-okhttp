@@ -1,14 +1,15 @@
 package com.learn.more;
 
-import lombok.Getter;
-
+import com.learn.more.EventListener.Factory;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 @Getter
 public class OkHttpClient implements Call.Factory {
+
   private final Dispatcher dispatcher;
   private final List<Interceptor> interceptors;
   private final Proxy proxy;
@@ -38,6 +39,7 @@ public class OkHttpClient implements Call.Factory {
 
 
   public static final class Builder {
+
     private final Dispatcher dispatcher;
     private final List<Interceptor> interceptors;
     private Proxy proxy;
@@ -70,6 +72,10 @@ public class OkHttpClient implements Call.Factory {
       return this;
     }
 
+    public Builder eventListenerFactory(Factory eventListenerFactory) {
+      this.eventListenerFactory = eventListenerFactory;
+      return this;
+    }
 
     public OkHttpClient build() {
       return new OkHttpClient(this);

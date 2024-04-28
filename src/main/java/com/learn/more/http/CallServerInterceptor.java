@@ -51,9 +51,8 @@ public class CallServerInterceptor implements Interceptor {
         .toString();
 
     RealConnection connection = chain.call().transmitter().connection();
-    OutputStream out = null;
     try {
-      out = connection.socket().getOutputStream();
+      OutputStream out = connection.socket().getOutputStream();
       out.write(line.getBytes(StandardCharsets.UTF_8));
       out.flush();
       InputStream in = connection.socket().getInputStream();
